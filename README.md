@@ -5,7 +5,7 @@ BiBOT is  a chat bot able to help you analize your data. Talk BiBOT about how ar
 
 Easy drill dow/up, just say "by providers" or "what about this TravelAgency" to filter.
 
-## Refereces
+## References
 ### NLP
 https://opennlp.apache.org/
 
