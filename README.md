@@ -5,6 +5,8 @@ BiBOT is  a chat bot able to help you analize your data. Talk BiBOT about how ar
 
 Easy drill dow/up, just say "by providers" or "what about this TravelAgency" to filter.
 
+![whatsapp](https://raw.githubusercontent.com/gbrian/bibot/master/images/whatsapp.png)
+
 # How does it works
 BiBOT is build up in layers: **chat**, **data** and **presentation**
 
