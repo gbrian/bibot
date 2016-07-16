@@ -1,0 +1,29 @@
+{
+  "name": "bitbotserver",
+  "version": "1.0.0",
+  "description": "",
+  "main": "bitbotserver.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gbrian/bibot.git"
+  },
+  "author": "Gustavo Brian <gustavo.brian@gmail.com> (https://www.linkedin.com/profile/view?id=42069667)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gbrian/bibot/issues"
+  },
+  "homepage": "https://github.com/gbrian/bibot#readme",
+  { "dependencies" :
+    { 
+      "d3" : "latest",
+	  "jsdom" : "latest",
+	  "restify" : "latest",
+	  "commander" : "latest",
+	  "request" : "latest",
+	  "svg2png": "latest"
+	}
+  }
+}

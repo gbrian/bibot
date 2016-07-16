@@ -107,8 +107,34 @@ var KueriMe = function(ops){
 							}
 						];
 			var req = util.format(this.baseRQ, "getResults", this.buildParams(params));
-				this.POST(req, function(js, xml){
-					callback(js);
+				this.POST(req, function(kres, xml){
+					var columns = kres.queries[0].columns
+									.map(function(col, index){ return !col.h ? { index: index, name: col.n, valueType: col.t, drill: !!col.d } : null})
+									.filter(function(col){ return col != null});
+					var rows = Object.keys(kres.results.rows)
+									.map(function(key){ return kres.results.rows[key]});
+					var res = { 
+								query : kres.query, 
+								suggestion : kres.suggestion, 
+								data: {
+									values: rows.map(function(row){ 
+											var o = {}; 
+											columns.map(function(col){ 
+												var value = row[col.index];
+												if(col.valueType == "date"){
+													// mm-dd-yyyy
+													var parts = value.split("-");
+													// yyyy-mm-dd
+													value = new Date(Date.parse(parts[2] + "-" + parts[0] + "-" + parts[1]));
+												}
+												o[col.name] = value; 
+											}); 
+											return o;
+										}),
+									columns: columns
+								}
+							};
+					callback(res);
 				});
 		}
 	}).login();
