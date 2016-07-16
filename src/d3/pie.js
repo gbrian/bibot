@@ -19,8 +19,8 @@ module.exports = {
 			.attr("transform", "translate(" + settings.margin.left + "," + settings.margin.top + ")");
 		
 		svg.selectAll('.arc')
-	    		.data( d3.layout.pie()(bins) )
-	    			.enter()
+	    		.data(d3.layout.pie()(bins))
+	    		.enter()
 	    		.append('path')
 	    			.attr({
 	    				'class':'arc',
