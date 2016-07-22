@@ -1,6 +1,4 @@
 // Original version svg2png: https://www.npmjs.com/package/svg2png
-// Changes:
-//  * Send data as is not as an image to be able to render whole html not only svg image
 // 
 "use strict";
 

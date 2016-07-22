@@ -1,0 +1,2 @@
+var echart = require('echart');
+

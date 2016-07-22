@@ -85,7 +85,8 @@ var KueriMe = function(ops){
 					callback(js);
 				});
 		},
-		getResults: function(dbid, text, query, callback){
+		getResults: function(dbid, text, query, callback, settings){
+			settings = settings || {};
 			var params = [
 							{	type:'string',
 								value:this.ops.token
@@ -125,7 +126,11 @@ var KueriMe = function(ops){
 													// mm-dd-yyyy
 													var parts = value.split("-");
 													// yyyy-mm-dd
-													value = new Date(Date.parse(parts[2] + "-" + parts[0] + "-" + parts[1]));
+													var ds = parts[2] + "-" + parts[0] + "-" + parts[1];
+													if(settings.dateAsString)
+														value = ds;
+													else
+														value = new Date(Date.parse(ds));
 												}
 												o[col.name] = value; 
 											}); 
@@ -136,6 +141,35 @@ var KueriMe = function(ops){
 							};
 					callback(res);
 				});
+		},
+		getCube: function(dbid, text, query, callback){
+			var parseRes = function(js){
+				var data = {
+					query: js.query,
+					suggestion: js.suggestion,
+					attributes: {},
+					metrics: {}
+				};
+				// Load attributes
+				js.data.columns
+					// No drill columns
+					.map(function(c){ 
+						// Read all values
+						var container = (c.drill ? data.metrics: data.attributes);
+						container[c.name] = js.data.values
+							.map(function(v){ 
+								return v[c.name] 
+							});
+						// Distinct attributes!
+						if(!c.drill)
+							// Distinct
+							container[c.name] = container[c.name].filter(function(value, index, array) {
+								return array.indexOf(value, index + 1) < 0;  
+							}); 
+					})
+				callback(data);
+			};
+			this.getResults(dbid, text, query, parseRes, { dateAsString: true });
 		}
 	}).login();
 };

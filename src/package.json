@@ -16,14 +16,14 @@
     "url": "https://github.com/gbrian/bibot/issues"
   },
   "homepage": "https://github.com/gbrian/bibot#readme",
-  { "dependencies" :
+  "dependencies" :
     { 
       "d3" : "latest",
-	  "jsdom" : "latest",
-	  "restify" : "latest",
-	  "commander" : "latest",
-	  "request" : "latest",
-	  "svg2png": "latest"
-	}
-  }
+      "jsdom" : "latest",
+      "restify" : "latest",
+      "commander" : "latest",
+      "request" : "latest",
+      "svg2png": "latest",
+	  "echarts": "3.2.2"
+    }
 }

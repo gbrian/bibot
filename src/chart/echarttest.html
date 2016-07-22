@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>ECharts</title>
+    <!-- including ECharts file -->
+    <script type="text/javascript" src="echarts.min.js"></script>
+	<script type="text/javascript" src="jquery.min.js"></script>
+</head>
+<body>
+	<h3><b>Query:</b> Show me sales cost and benefit this week</h3>
+	<h4><i><b>Showing:</b> Sales and Cost and Benefit from ... to ...</i></h4>
+    <!-- prepare a DOM container with width and height -->
+    <div id="main" style="width: 600px;height:400px;"></div>
+	<script type="text/javascript">
+		function drawChart(data){
+			console.log(data);
+			// specify chart configuration item and data
+			var option = {
+				legend: {
+					data: Object.keys(data.metrics)
+				},
+				xAxis: {
+					name: 'Xaxis',
+					data: data.attributes[Object.keys(data.attributes)[0]]
+				},
+				yAxis: {},
+				series: Object.keys(data.metrics)
+							.map(function(metric, i){
+								return {
+									name: metric,
+									type: i % 2 == 0 ? 'bar': 'line',
+									label:{
+									  normal:{
+										  show:true
+									  }  
+									},
+									data: data.metrics[metric]
+								}
+							})
+			};
+			console.log(JSON.stringify(option));
+			// use configuration item and data specified to show chart
+			echarts.init(document.getElementById('main'))
+				.setOption(option);
+		}
+		try{
+			jQuery.getJSON("/api/data" + window.location.search, drawChart);
+		}catch(e){
+			console.log(e);
+		}
+    </script>
+</body>
+</html>

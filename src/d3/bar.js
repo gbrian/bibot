@@ -49,7 +49,10 @@ module.exports = {
 
 		bar.append("rect")
 			.attr("x", 1)
-			.attr("width", barWidth)
+			.attr("width", function(d, i){ 
+				return 10;
+				return (i == 0 ? x(d[key]): (x(d[key]) - x(bins[i-1][key])) / 2);
+			})
 			.attr("height", function(d) { return settings.height - y(d[value]); })
 			.attr("fill", function(d) {
 				return "rgb(0, 0, " + (d[value] * fillInc) + ")";
